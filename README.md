@@ -17,4 +17,4 @@ Please refer to the [wiki](https://github.com/TheImagingSource/tiscamera/wiki).
 
 ## Licensing
 
-All files are published under the [Apache License 2.0](README.md).
+All files are published under the [Apache License 2.0](LICENSE.md).
