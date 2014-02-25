@@ -13,7 +13,7 @@ This repository is maintained by The Imaging Source, and it provides the officia
 
 ## Getting Started
 
-Take a look at our wiki to see where to begin.
+Please refer to the [wiki](https://github.com/TheImagingSource/tiscamera/wiki).
 
 ## Licensing
 
