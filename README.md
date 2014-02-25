@@ -6,10 +6,10 @@ This repository is maintained by The Imaging Source, and it provides the officia
 
 ## What Do We Offer?
 
-* gstreamer elements
-* uvc extensions
-* Firmware update tools
-* Examples on how to interact with your industrial camera
+* gstreamer elements.
+* uvc extensions.
+* Firmware update tools.
+* Examples on how to interact with your industrial camera.
 
 ## Getting Started
 
@@ -17,4 +17,4 @@ Please refer to the [wiki](https://github.com/TheImagingSource/tiscamera/wiki).
 
 ## Licensing
 
-All files are published under the Apache License 2.0.
+All files are published under the [Apache License 2.0](README.md).
