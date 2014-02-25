@@ -1,23 +1,20 @@
+![alt text](http://s1.www.theimagingsource.com/img/tis_logo.png "The Imaging Source")
+
 # The Imaging Source Linux Repository
 
-This repository will give you additional ressources to control your TIS camera.
+This repository is maintained by The Imaging Source, and it provides the official **Linux support** for The Imaging Source industrial cameras. If you need assistance in using this source code, please contact us [by telephone](http://www.theimagingsource.com/en_US/company/locations/) or [by e-mail](http://www.theimagingsource.com/en_US/company/contact/). Our Linux software engineers await your call or e-mail.
 
-## What do we offer?
+## What Do We Offer?
 
 * gstreamer elements
 * uvc extensions
-* firmware update tools
-* examples on how to interact with your camera
+* Firmware update tools
+* Examples on how to interact with your industrial camera
 
-## Don't know where to start?
+## Getting Started
 
 Take a look at our wiki to see where to begin.
-
-## Questions, etc.
-
-For questions simply open a ticket or write us a mail.
 
 ## Licensing
 
 All files are published under the Apache License 2.0.
-
