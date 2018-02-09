@@ -1277,7 +1277,7 @@ static void init_camera_resources (GstTcamautoexposure* self)
 
         if (self->exposure_min != 0)
         {
-            self->exposure_min = self->exposure.min;
+            self->exposure.min = self->exposure_min;
         }
 
         // do not set exposure.max
@@ -1382,7 +1382,9 @@ static gdouble modify_gain (GstTcamautoexposure* self, gdouble diff)
 
         gdouble g_ref;
 
-        if (diff <= 40.0)
+        // this number can be difficult to get right
+        // maybe make it fps dependent?
+        if (fabs(diff) >= 0.10)
         {
             g_ref = self->gain.value + K_GAIN_FAST * diff;
         }
@@ -1415,10 +1417,13 @@ static gdouble modify_gain (GstTcamautoexposure* self, gdouble diff)
             }
             set_gain(self, setter);
         }
-        GST_DEBUG("NEW GAIN: g_ref %f - new_gain %f / K_GAIN %f = %f",
-                  g_ref, new_gain, K_GAIN, (g_ref - new_gain) / K_GAIN);
 
-        return (g_ref - new_gain) / K_GAIN;
+        double new_diff = (double)(g_ref - new_gain) / (K_GAIN);
+
+        GST_DEBUG("NEW GAIN: g_ref %f - new_gain %f / K_GAIN %f = %f",
+                  g_ref, new_gain, K_GAIN, new_diff);
+
+        return new_diff;
     }
     else
     {
@@ -1437,7 +1442,7 @@ static double modify_exposure (GstTcamautoexposure* self, gdouble diff)
     if (self->auto_exposure)
     {
         const double e_ref = self->exposure.value * pow(2, diff);
-        const double new_exposure = fmax(fmin(e_ref, self->exposure_max), self->exposure_min);
+        const double new_exposure = fmax(fmin(e_ref, self->exposure_max), self->exposure.min);
 
         if (fabs(self->exposure.value - new_exposure) > K_SMALL)
         {
@@ -1580,9 +1585,9 @@ static image_buffer retrieve_image_region (GstTcamautoexposure* self, GstBuffer*
 
     new_buf.pattern = calculate_pattern_from_offset(self);
 
-    GST_INFO("Region is from %d %d to %d %d",
-             self->image_region.x0, self->image_region.y0,
-             self->image_region.x0 + self->image_region.x1, self->image_region.y0 + self->image_region.y1);
+    // GST_INFO("Region is from %d %d to %d %d",
+    //          self->image_region.x0, self->image_region.y0,
+    //          self->image_region.x0 + self->image_region.x1, self->image_region.y0 + self->image_region.y1);
 
     gst_buffer_unmap(buf, &info);
 
