@@ -19,12 +19,14 @@
 
 #include <gst/gst.h>
 #include <gst/base/gstpushsrc.h>
+#include "tcam.h"
 
 #include <girepository.h>
 
 #include <mutex>
 #include <condition_variable>
 #include <string>
+#include <queue>
 
 #ifdef __cplusplus
 extern "C"
@@ -44,7 +46,13 @@ G_BEGIN_DECLS
 typedef struct _GstTcamSrc GstTcamSrc;
 typedef struct _GstTcamSrcClass GstTcamSrcClass;
 
-struct device_state;
+struct device_state
+{
+    bool initialized = false;
+    std::shared_ptr<tcam::CaptureDevice> dev;
+    std::shared_ptr<tcam::ImageSink> sink;
+    std::queue<std::shared_ptr<tcam::MemoryBuffer>> queue;
+};
 
 struct _GstTcamSrc
 {
@@ -52,7 +60,7 @@ struct _GstTcamSrc
 
     std::string device_serial;
 
-    struct device_state* device;
+    struct device_state device;
 
     int n_buffers;
 
